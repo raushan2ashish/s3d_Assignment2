@@ -12,8 +12,8 @@ private:
     int CurrentTask = 1;
     void HandleInput();
     void Render1_SpiralSphere();
-    //void Render2();
-    //void Render3();
+    void Render2_DiffuseCube();
+    void Render3_SpotlightModel();
     //void Render4();
     //void Render5();
     
