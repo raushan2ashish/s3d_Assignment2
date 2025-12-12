@@ -15,6 +15,7 @@
 #include "RasterizationScene.h"
 #include "RaycastingScene.h"
 #include "EffectScene.h"
+#include "LightCastersScene.h"//
 
 Scene* Scene::sScenes[Scene::COUNT]{};
 Scene::Type Scene::sCurrent = Scene::COUNT;
@@ -22,6 +23,7 @@ bool Scene::sSelect = false;
 
 void Scene::Create(Scene::Type scene)
 {
+	sScenes[CPU_LIGHT_CASTERS] = new LightCastersScene;
 	sScenes[SOLAR_SYSTEM] = new SolarSystemScene;
 	sScenes[NEON_LIGHTS] = new NeonLightScene;
 	sScenes[REFLECTIVE_PAINT] = new ReflectivePaintScene;
@@ -34,7 +36,7 @@ void Scene::Create(Scene::Type scene)
 
 	sScenes[CPU_RASTERIZATION] = new RasterizationScene;
 	sScenes[CPU_RAYCASTING] = new RaycastingScene;
-	sScenes[CPU_EFFECT] = new EffectScene;
+	sScenes[CPU_EFFECT] = new EffectScene;//
 
 	for (size_t i = 0; i < COUNT; i++)
 		sScenes[i]->OnCreate();
@@ -102,7 +104,8 @@ void Scene::DrawImGui()
 
 			"CPU Rasterization",
 			"CPU Raycasting",
-			"CPU Effect"
+			"CPU Effect",
+			"CPU Light Casters"//
 		};
 
 		int scene = Current();
