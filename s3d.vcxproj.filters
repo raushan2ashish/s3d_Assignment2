@@ -156,6 +156,9 @@
     <ClCompile Include="src\SkinningScene.cpp">
       <Filter>Scene\Unfinished Scenes</Filter>
     </ClCompile>
+    <ClCompile Include="src\LightCastersScene.cpp">
+      <Filter>Scene\Software Rendering Scenes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="inc\imgui\imconfig.h">
@@ -301,6 +304,9 @@
     </ClInclude>
     <ClInclude Include="src\SkinningScene.h">
       <Filter>Scene\Unfinished Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="src\LightCastersScene.h">
+      <Filter>Scene\Software Rendering Scenes</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
