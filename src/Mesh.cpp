@@ -24,6 +24,7 @@ Mesh gMeshCt4;
 Mesh gMeshGround;
 Mesh gMeshHexagon;
 Mesh gMeshTd;
+Mesh gMeshMp7;
 
 // Copies a par_shapes_mesh to a Mesh
 void CopyMesh(Mesh* dst, par_shapes_mesh* src);
@@ -39,11 +40,14 @@ void CreateMeshes()
 	GenMeshObj(&gMeshCt4, "assets/meshes/ct4.obj");
 
 	GenMeshObj(&gMeshTd, "assets/meshes/bld_td.obj");
+	GenMeshObj(&gMeshMp7, "assets/meshes/mp7.obj");
+
 	GenMeshPlane(&gMeshGround);
 	GenMeshCircle(&gMeshHexagon, 1.0f, 6);
 
 	CreateMesh(&gMeshHead);
 	CreateMesh(&gMeshCt4);
+	CreateMesh(&gMeshMp7);
 
 	CreateMesh(&gMeshTd);
 	CreateMesh(&gMeshGround);
@@ -57,6 +61,7 @@ void DestroyMeshes()
 	DestroyMesh(&gMeshTd);
 
 	DestroyMesh(&gMeshCt4);
+	DestroyMesh(&gMeshMp7);
 	DestroyMesh(&gMeshHead);
 
 	DestroyShapes();

@@ -14,7 +14,10 @@ Vector3 FS_Barycentric(const VertexAttributes& atr, const UniformData& data)
 	return { fabsf(atr.p.x), fabsf(atr.p.y), fabsf(atr.p.z) };
 }
 
-void LightCastersScene::OnLoad() {}
+void LightCastersScene::OnLoad() 
+{
+	
+}
 void LightCastersScene::OnUnload() {}
 
 void LightCastersScene::OnUpdate(float dt)
@@ -39,8 +42,8 @@ void LightCastersScene::HandleInput()
 		CurrentTask = 1;
 	else if (IsKeyPressed(KEY_2))
 	    CurrentTask = 2;
-	//else if (IsKeyPressed(KEY_3))
-	//    CurrentTask = 3;
+	else if (IsKeyPressed(KEY_3))
+	    CurrentTask = 3;
 	//else if (IsKeyPressed(KEY_4))
 	//    CurrentTask = 4;
 	//else if (IsKeyPressed(KEY_5))
@@ -75,7 +78,7 @@ void LightCastersScene::Render2_DiffuseCube()
 {
 	float tt = TotalTime();
 
-	Matrix world = RotateY(0.0f * tt * DEG2RAD) * Translate(0.0f, 0.0f, 7.0f);
+	Matrix world = RotateY(60.0f * tt * DEG2RAD) * Translate(0.0f, 0.0f, 7.0f);
 	Matrix view = LookAt({ 0.0f, 0.0f, 10.0f }, V3_ZERO, V3_UP);
 	Matrix proj = Perspective(90.0f * DEG2RAD, 1.0f, 0.1f, 100.0f);
 
@@ -91,9 +94,38 @@ void LightCastersScene::Render2_DiffuseCube()
 	DrawMesh(&gImageCPU, gMeshCube, data, FS_Diffuse);
 }
 
+Vector3 FS_SpotLight(const VertexAttributes& atr, const UniformData& data)
+{
+	Vector3 lightPos = { 0, 8, 0 };
+	Vector3 P = atr.p;
+	Vector3 N = Normalize(atr.n);
+	Vector3 Lvec = lightPos - P;
+	float dist = Length(Lvec);
+	Vector3 L = Normalize(Lvec);
+	float ndotl = fmaxf(Dot(N, L), 0.0f);
+	float atten = 1.0f / (1.0f + 0.1f * dist);
+	float intensity = ndotl * atten;
+	return { intensity, intensity, intensity };
+}
+
 void LightCastersScene::Render3_SpotlightModel()
 {
+	float tt = TotalTime();
 
+	Matrix world = RotateY(60.0f * tt * DEG2RAD) * Translate(0.0f, 0.0f, 7.0f);
+	Matrix view = LookAt({ 0.0f, 0.0f, 10.0f }, V3_ZERO, V3_UP);
+	Matrix proj = Perspective(90.0f * DEG2RAD, 1.0f, 0.1f, 100.0f);
+
+	UniformData data;
+	data.world = world;
+	data.mvp = world * view * proj;
+	//data.tex = &fTexHead;
+	data.lightColor = { sinf(tt) * 0.5f + 0.5f, sinf(tt + PI * 0.33f) * 0.5f + 0.5f, sinf(tt + PI * 0.66f) * 0.5f + 0.5f };
+	data.lightDirection = Normalize(V3_RIGHT + V3_UP + V3_FORWARD);
+
+
+
+	DrawMesh(&gImageCPU, gMeshMp7, data, FS_SpotLight);
 }
 
 

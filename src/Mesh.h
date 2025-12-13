@@ -34,7 +34,9 @@ extern Mesh gMeshHead;
 extern Mesh gMeshCt4;
 extern Mesh gMeshGround;	// 1x1 PLANE_XZ (faces +Y)
 extern Mesh gMeshHexagon;	// Unit hexagon r = 1, faces +Y
-extern Mesh gMeshTd;		// 10 x 10 x 50
+extern Mesh gMeshTd;	
+extern Mesh gMeshMp7;	
+// 10 x 10 x 50
 
 void CreateMeshes();	// Create game meshes
 void DestroyMeshes();	// Destroy game meshes
